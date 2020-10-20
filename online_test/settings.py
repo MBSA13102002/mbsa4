@@ -81,7 +81,11 @@ WSGI_APPLICATION = 'online_test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'admin',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST':'nsacodermbsa.herokuapp.com',
+        
     }
 }
 
@@ -129,3 +133,4 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT= os.path.join(BASE_DIR, "static")
+# 'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
