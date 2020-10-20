@@ -1,8 +1,10 @@
+from django.contrib import admin
 from django.conf.urls import url
 from .views import QuizListView, CategoriesListView,\
     ViewQuizListByCategory, QuizUserProgressView, QuizMarkingList,\
-    QuizMarkingDetail, QuizDetailView, QuizTake, index, login_user, logout_user
-from django.urls import path
+    QuizMarkingDetail, QuizDetailView, QuizTake, index, login_user, logout_user,settings
+from django.urls import path,include
+from django.conf.urls.static import static
 
 
 urlpatterns = [         url(regex=r'^$', view=index, name='index'),

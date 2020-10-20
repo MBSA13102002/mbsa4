@@ -25,14 +25,14 @@ SECRET_KEY = 'q^n4^0*8v2f9%qs$+hg7l0g!-461fja26bzq=cwp)y3u&k6i8&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nsacodermbsa.herokuapp.com']
+ALLOWED_HOSTS = [ '127.0.0.1','nsacodermbsa.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'mcq.apps.McqConfig',
-    'quiz.apps.QuizConfig',
+    'mcq',
+    'quiz',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -126,4 +126,4 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static")
 ]
 
-STATIC_ROOT= os.path.join(BASE_DIR, "static")
+# STATIC_ROOT= os.path.join(BASE_DIR, "static")
