@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ['nsacodermbsa.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'mcq',
-    'quiz',
+    'mcq.apps.McqConfig',
+    'quiz.apps.QuizConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
