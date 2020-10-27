@@ -11,10 +11,14 @@ from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+from quiz.models import Progress
 
 
 class QuizMarkerMixin(object):
-    @method_decorator(login_required)
+    @method_decorator(login_required) 
     @method_decorator(permission_required('quiz.view_sittings'))
     def dispatch(self, *args, **kwargs):
         return super(QuizMarkerMixin, self).dispatch(*args, **kwargs)
@@ -36,6 +40,10 @@ class QuizListView(ListView):
     def get_queryset(self):
         queryset = super(QuizListView, self).get_queryset()
         return queryset.filter(draft=False)
+
+# def QuizListView(request):
+#     return render(request,"quiz_list.html")
+
 
 
 class QuizDetailView(DetailView):
@@ -235,32 +243,81 @@ class QuizTake(FormView):
         return render(self.request, 'result.html', results)
 
 
+# class LeaderBoard(TemplateView):
+#     template_name = 'leaderboard.html'
 
+#     @method_decorator(login_required)
+#     def dispatch(self, request, *args, **kwargs):
+#         return super(LeaderBoard, self)\
+#             .dispatch(request, *args, **kwargs)
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(LeaderBoard, self).get_context_data(**kwargs)
+    #     progress, c = Progress.objects.get_or_create(user=self.request.user)
+    #     context['cat_scores'] = progress.list_all_cat_scores
+    #     context['exams'] = progress.show_exams()
+    #     return context
+  
+    
+
+
+# from django.contrib.auth.models import User
+# from django.contrib.sessions.models import Session
+# from django.utils import timezone
+
+# def get_current_users():
+#     active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+#     user_id_list = []
+#     for session in active_sessions:
+#         data = session.get_decoded()
+#         user_id_list.append(data.get('_auth_user_id', None))
+#     # Query all logged in users based on id list
+#     return User.objects.filter(id__in=user_id_list)
+#     queryset = get_current_users()
+#     return render(request,'leaderboard.html')
 
 def index(request):
-    return render(request, 'index.html', {})
-
+    
+    return render(request, 'index.html')
+def leaderboard(request):
+    f=Progress.objects.all()
+    
+    return render(request,'leaderboard.html') 
 
 def login_user(request):
-
+    username = request.POST.get('username')
+    raw_password = request.POST.get('password')
+    # print(username,raw_password)
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
+        
+        username = request.POST.get('username')
+        raw_password = request.POST.get('password')
+        # print(username,raw_password)
+        try:   
+            user = authenticate(username=username, password=raw_password)
             login(request, user)
-            messages.success(request, 'You have successfully logged in')
-            return redirect("index")
-        else:
-            messages.success(request, 'Error logging in')
-            return redirect('login')
-    else:
+            messages.success(request, 'You Are Welcome!@!')
+            
+        except: 
+           
+            User = get_user_model()
+            user = User.objects.create_user(username=username,password=raw_password)                       
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            messages.success(request, 'You Are Welcome!@!')
+        
+            
+
+        return render(request, 'index.html',{})
+    else: 
+          
         return render(request, 'login.html', {})
+    return render(request, 'login.html', {})
 
 
 def logout_user(request):
     logout(request)
-    messages.success(request, 'You have been logged out!')
     print('logout function working')
     return redirect('login')
+
 

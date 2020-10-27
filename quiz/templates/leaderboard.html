@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load progress_tags%}
+{% comment %} {% load quiz_tags %} {% endcomment %}
+
+
+{% block title %} {% trans "leaderboard Page" %} {% endblock %}
+{% block description %} {% trans "leaderboard Page" %} {% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped">
+
+	<thead>
+
+		<tr>
+			<th>{% trans "NAME" %}</th>
+			<th>{% trans "SCORE" %}</th>
+			{% comment %} <th>{% trans "PERCENTAGE" %}</th> {% endcomment %}
+			
+		</tr>
+	</thead>
+
+	<tbody>
+
+		
+			
+			{% comment %} {% progress as leaderboard %}
+			{% progress1 as leaderboard1 %}
+			{% progress2 as leaderboard2 %} {% endcomment %}
+			{% progress3 as leaderboard %}
+			{% for one,two in leaderboard %}
+				<tr>
+			        <td>{{ one}}</td>
+			        <td>{{ two }}</td>
+			        {% comment %} <td>{{ three }}</td>         {% endcomment %}
+				</tr>  
+			{% endfor %}
+		
+
+
+
+	</tbody>
+
+</table>
+{% endblock %}

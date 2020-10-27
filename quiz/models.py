@@ -28,7 +28,7 @@ class CategoryManager(models.Manager):
 
 class Category(models.Model):
 
-    category = models.CharField(
+    category = models.CharField( 
         verbose_name=_("Category"),
         max_length=250, blank=True,
         unique=True, null=True)
@@ -61,7 +61,13 @@ class Quiz(models.Model):
     category = models.ForeignKey(
         Category, null=True, blank=True,
         verbose_name=_("Category"), on_delete=models.CASCADE)
-
+# =====================================================================
+    timer = models.SmallIntegerField(default=60,blank=True, null=True, verbose_name=_("Timer"),
+        help_text=_("time to be alloted on a quiz"))
+# v=============================================================================================
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+    #         verbose_name=_("User"), on_delete=models.CASCADE)
+# ========================================================================================
     random_order = models.BooleanField(
         blank=False, default=False,
         verbose_name=_("Random Order"),
@@ -114,7 +120,7 @@ class Quiz(models.Model):
                     " in the quiz list and can only be"
                     " taken by users who can edit"
                     " quizzes."))
-
+    
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.url = re.sub('\s+', '-', self.url).lower()
 
@@ -519,7 +525,11 @@ class Question(models.Model):
     quiz = models.ManyToManyField(Quiz,
                                   verbose_name=_("Quiz"),
                                   blank=True)
-
+#   ==========================================================================================                              
+    # user = models.OneToOneField(settings.AUTH_USER_MODEL, 
+    #         verbose_name=_("User"), blank=True,
+    #                              null=True, on_delete=models.CASCADE)
+# ===========================================================================================
     category = models.ForeignKey(Category,
                                  verbose_name=_("Category"),
                                  blank=True,

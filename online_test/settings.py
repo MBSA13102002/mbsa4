@@ -132,5 +132,5 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static")
 ]
 
-STATIC_ROOT= os.path.join(BASE_DIR, "static")
+# STATIC_ROOT= os.path.join(BASE_DIR, "static")
 # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3')

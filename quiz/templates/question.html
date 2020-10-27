@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% load i18n%}
+{% load quiz_tags %}
 
 
 
@@ -8,22 +10,23 @@
 
 {% block content %}
 
+<!-- <p id="demo"></p> -->
 {% if previous.answers %}
 
-  <p class="muted"><small>{% trans "The previous question" %}:</small></p>
-  <p>{{ previous.previous_question }}</p>
+<p class="muted"><small>{% trans "The previous question" %}:</small></p>
+<p>{{ previous.previous_question }}</p>
 
-  {% if previous.previous_outcome %}
-	<div class="alert alert-success">
-  {% else %}
+{% if previous.previous_outcome %}
+<div class="alert alert-success">
+	{% else %}
 	<div class="alert alert-warning">
-  {% endif %}
-  	  <p><small>
-		{% trans "Your answer was" %} </small>
-		<strong>
-		  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
-		</strong>
-	  </p>
+		{% endif %}
+		<p><small>
+				{% trans "Your answer was" %} </small>
+			<strong>
+				{{ previous.previous_outcome|yesno:"correct,incorrect" }}
+			</strong>
+		</p>
 
 	</div>
 
@@ -31,57 +34,277 @@
 
 	<p><strong>{% trans "Explanation" %}:</strong></p>
 	<div class="well " style="background-color: #fcf8e3;">
-	  <p>{{ previous.previous_question.explanation }}</p>
+		<p>{{ previous.previous_question.explanation }}</p>
 	</div>
 
 	<hr>
 
-{% endif %}
+	{% endif %}
 
-<br />
+	<br />
 
-{% if question %}
-
-{% if progress %}
-<div style="float: right;">
-{% trans "Question" %} {{ progress.0|add:1 }} {% trans "of" %} {{ progress.1 }}
-</div>
-{% endif %}
-
-<p>
-  <small class="muted">{% trans "Question category" %}:</small>
-  <strong>{{ question.category }}</strong>
-</p>
-
-<p class="lead">{{ question.content }}</p>
-
-{% if question.figure %}
-    <img src="{{ question.figure.url }}" alt="{{ question.content }}" />
-{% endif %}
-
-<form action="" method="POST">
-{% csrf_token %}
-  <input type=hidden name="question_id" value="{{ question.id }}">
-
-  <ul class="list-group">
-
-	{% for answer in form.answers %}
-	  <li class="list-group-item">
-	    {{ answer }} 
-	  </li>
-	{% endfor %}
-
-  </ul>
-    {% if progress.0|add:1 == progress.1 %}
-    <input type="submit" value={% trans "Submit" %} class="btn btn-large btn-block btn-warning" >
-    {% else %}
-        <input type="submit" value={% trans "Next" %} class="btn btn-large btn-block btn-warning" >
-    {% endif %}
-</form>
-
-{% endif %}
-
-<hr>
+	<body>
 
 
-{% endblock %}
+
+		<!-- ============================JAVA SCRIPT======================================================= -->
+		<script>
+
+			//Set the date we're counting down to
+			var countDownDate = new Date().getTime();
+			var countDownDate1 = new Date().getTime() + 17000
+
+			// Update the count down every 1 second
+			var x = setInterval(function () {
+
+				// Get today's date and time
+				var now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				var distance = countDownDate1 - now;
+
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				// Output the result in an element with id="demo"
+				document.getElementById("demo").innerHTML = hours + "h "
+					+ minutes + "m " + seconds + "s ";
+
+				// If the count down is over, write some text 
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("demo").innerHTML = "";
+					// alert("You are out of time!");
+					// ===================================================================
+					// var radioChecked = 0;
+					// var radios = document.getElementsByName("myForm");
+					// for (var i = 0; i < radios.length; i++) {
+					// 	if (radios[i].checked) {
+					// 		radioChecked = radioChecked + 1;
+					// 	}
+					// }				
+					// =========================================================
+					var myForm = document.getElementById("myForm");
+					checkone1(this.myForm);
+					myForm.submit();
+
+
+
+
+				}
+			}, 1000);
+		</script>
+		{% comment %}
+		<script>
+			function nullvalue(f) {
+				for (x = 0; x < f.elements.length; x++) {
+					if (f.elements[x].type == "false") {
+						f.elements[x].checked = true;
+					}
+				}
+			}
+		</script> {% endcomment %}
+
+		<script>
+			function checkone1(f) {
+				for (x = 0; x < f.elements.length; x++)
+					if (f.elements[x].type == "radio") {
+						if (f.elements[x].checked = true) {
+							var myForm = document.getElementById("myForm");
+							myForm.submit();
+						}
+
+						else if (f.elements[x + 1].checked = true) {
+							var myForm = document.getElementById("myForm");
+							myForm.submit();
+						}
+
+						else if (f.elements[x + 2].checked = true) {
+							var myForm = document.getElementById("myForm");
+							myForm.submit();
+
+						}
+						else if (f.elements[x + 3].checked = true) {
+							var myForm = document.getElementById("myForm");
+							myForm.submit();
+						}
+
+					}
+			}
+
+		</script>
+		{% comment %}
+		<!-- <p id="demo"></p> --> {% endcomment %}
+		{% if question  %}
+		
+
+		{% if progress %}
+		<div style="float: right;">
+			{% trans "Question" %} {{ progress.0|add:1 }} {% trans "of" %} {{ progress.1 }}
+		</div>
+		{% endif %}
+
+		<p>
+			<small class="muted">{% trans "Question category" %}:</small>
+			<strong>{{ question.category }}</strong>
+		</p>
+		{% comment %}
+		+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		{% endcomment %}
+		<!-- <p id="demo"></p> -->
+		<!-- <script>
+			//Set the date we're counting down to
+			var countDownDate = new Date().getTime();
+			var countDownDate1 = new Date().getTime() + 17000
+
+			// Update the count down every 1 second
+			var x = setInterval(function () {
+
+				// Get today's date and time
+				var now = new Date().getTime();
+
+				// Find the distance between now and the count down date
+				var distance = countDownDate1 - now;
+
+				// Time calculations for days, hours, minutes and seconds
+				var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+				// Output the result in an element with id="demo"
+				document.getElementById("demo").innerHTML = hours + "h "
+					+ minutes + "m " + seconds + "s ";
+
+				// If the count down is over, write some text 
+				if (distance < 0) {
+					clearInterval(x);
+					document.getElementById("demo").innerHTML = "EXPIRED";
+					alert("You are out of time!");
+					const myForm = document.getElementById("myForm");
+					myForm.submit();
+				}
+			}, 1000);
+		</script> -->
+		{% comment %} ========================================================================================
+		{% endcomment %}
+
+		<p class="lead">{{ question.content }}</p>
+
+		{% if question.figure %}
+		<img src="{{ question.figure.url }}" alt="{{ i.content }}" />
+		{% endif %}
+
+		<form action="" method="POST" id="myForm">
+			{% csrf_token %}
+
+			<input type=hidden name="question_id" value="{{ question.id }}">
+
+			<ul class="list-group">
+				{% for answer in form.answers %}
+				<li class="list-group-item ">
+					{{ answer }}
+				</li>
+				{% comment %}
+				<script>
+					function checkone1(f) {
+
+						if (f.elements[0].type == "radio") {
+							if (f.elements[0].checked = true) {
+								var myForm = document.getElementById("myForm");
+								myForm.submit();
+							}
+
+							else if (f.elements[1].checked = true) {
+								var myForm = document.getElementById("myForm");
+								myForm.submit();
+							}
+
+							else if (f.elements[2].checked = true) {
+								var myForm = document.getElementById("myForm");
+								myForm.submit();
+							}
+							else if (f.elements[3].checked = true) {
+								var myForm = document.getElementById("myForm");
+								myForm.submit();
+							}
+
+							else {
+								for (x = 0; x < f.elements.length; x++) {
+									if (f.elements[x].type == "radio") {
+										f.elements[x].checked = true;
+									}
+								}
+							}
+
+						}
+					}
+
+				</script> {% endcomment %}
+
+				{% endfor %}
+
+				<!-- =========================clear button===================================== -->
+				<Script>
+					function uncheckAll(f) {
+						for (x = 0; x < f.elements.length; x++) {
+							if (f.elements[x].type == "radio") {
+								f.elements[x].checked = false;
+							}
+						}
+					}
+				</script>
+				<!-- ================================================================================= -->
+				<!-- =========================null value button===================================== -->
+				<Script>
+					function nullvalue(f) {
+						for (x = 0; x < f.elements.length; x++) {
+							if (f.elements[x].type == "radio") {
+								f.elements[x].checked = true;
+							}
+						}
+					}
+				</script>
+				<!-- ================================================================================= -->
+
+			</ul>
+			{% if progress.0|add:1 == progress.1 %}
+
+
+
+			<input type="button" value={% trans "Clear Response" %} class="btn btn-large btn-block btn-warning"
+				onClick='uncheckAll(this.form)'>
+			<input type="submit" value={% trans "Submit" %} class="btn btn-large btn-block btn-warning">
+			{% else %}
+
+			<input type="button" value={% trans "Clear Response" %} class="btn btn-large btn-block btn-warning"
+				onClick='uncheckAll(this.form)'>
+			<input type="button" value={% trans "Previous" %} class="btn btn-large btn-block btn-warning"
+				onClick='goBack()'>
+			<input type="submit" value={% trans "Next" %} class="btn btn-large btn-block btn-warning">
+			{% endif %}
+			{% comment %} <a href="#" class="previous">&laquo; Previous</a>
+			<a href="#" class="next">Next &raquo;</a> {% endcomment %}
+
+			<script>
+				function goBack() {
+					window.history.go(-1);
+				}
+			</script>
+			<!-- <script>
+				function goForward() {
+					window.history.forward();
+				}
+			</script>  -->
+		</form>
+
+		
+		{% endif %}
+
+		<hr>
+	</body>
+
+	{% endblock %}

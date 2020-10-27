@@ -19,26 +19,28 @@
 		  </thead>
 
 		  <tbody>
-
+        
         {% for quiz in quiz_list %}
-
-  			<tr>
-			  <td>{{ quiz.title }}</td>
-			  <td>{{ quiz.category }}</td>
-			  <td>{{ quiz.exam_paper }}</td>
-			  <td>{{ quiz.single_attempt }}</td>
-			  <td>
+		   
+            <tr>
+			    <td>{{ quiz.title }}</td>
+			    <td>{{ quiz.category }}</td>
+			    <td>{{ quiz.exam_paper }}</td>
+			    <td>{{ quiz.single_attempt }}</td>
+			    <td>
 				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
-				  {% trans "View details" %} 
-				</a>
+				       {% trans "View details" %} 
+				    </a>
+			    </td>
 			</tr>
 
+	
         {% endfor %}
 		  </tbody>
 
 		</table>
 
-	{% else %}
-        <p>{% trans "There are no available quizzes" %}.</p>
-    {% endif %}
+	 {% else %}
+        <p>{% trans "There are no available quizzes" %} </p> 
+    {% endif %} 
 {% endblock %}

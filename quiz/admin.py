@@ -53,7 +53,7 @@ class QuizAdminForm(forms.ModelForm):
 class QuizAdmin(admin.ModelAdmin):
     form = QuizAdminForm
 
-    list_display = ('title', 'category', )
+    list_display = ('title', 'category',)
     list_filter = ('category',)
     search_fields = ('description', 'category', )
 
@@ -66,9 +66,9 @@ class MCQuestionAdmin(admin.ModelAdmin):
     list_display = ('content', 'category', )
     list_filter = ('category',)
     fields = ('content', 'category',
-              'figure', 'quiz', 'explanation', 'answer_order')
+              'figure', 'quiz', 'explanation', 'answer_order',)
 
-    search_fields = ('content', 'explanation')
+    search_fields = ('content', 'explanation',)
     filter_horizontal = ('quiz',)
 
     inlines = [AnswerInline]

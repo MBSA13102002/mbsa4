@@ -18,7 +18,7 @@
 	  <tr>
 		<th>{% trans "Category" %}</th>
 		<th>{% trans "Correctly answererd" %}</th>
-		<th>{% trans "Incorrect" %}</th>
+		<th>{% trans "Total Questions" %}</th>
 		<th>%</th>
 	  </tr>
 	</thead>
@@ -42,7 +42,7 @@
 
 
   {% endif %}
-
+{% comment %} 
   {% if exams %}
 
   <hr>
@@ -80,7 +80,7 @@
 
   </table>
 
-  {% endif %}
+  {% endif %} {% endcomment %}
 
 
 {% endblock %}
