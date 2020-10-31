@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>This is my index page</h1>
-{% comment %} {% if user.is_authenticated %} {% endcomment %}
-    <p>WELCOME AT TODAY SPECIAL QUIZ SHOW !!!!</p>
-    {% comment %} <p>Name: {{user.first_name}} {{user.last_name}}</p>
-    <p>Email: {{user.email}}</p> {% endcomment %}
+<div class="denmark">
+<a href="{% url 'quiz_index' %}" class="badge badge-pill badge-primary c center">QUIZZES</a>
+  <a href="{% url 'quiz_progress' %}" class="badge badge-pill badge-danger c center">PROGRESS</a>
+  <a href="{% url 'leaderboard' %}" class="badge badge-pill badge-success c center">LEADERBOARD</a>
+ </div> 
 
     
 {% endblock  %}

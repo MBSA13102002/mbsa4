@@ -1,4 +1,5 @@
 from django import template
+from quiz.models import Quiz
 
 register = template.Library()
 
@@ -23,3 +24,8 @@ def correct_answer_for_all(context, question):
 @register.filter
 def answer_choice_to_string(question, answer):
     return question.answer_choice_to_string(answer)
+
+@register.simple_tag
+def questions():
+    f=Quiz.objects.all()[0].max_questions
+    return f

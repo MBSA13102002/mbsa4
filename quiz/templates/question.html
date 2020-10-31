@@ -48,7 +48,7 @@
 
 
 		<!-- ============================JAVA SCRIPT======================================================= -->
-		<script>
+		<!-- <script>
 
 			//Set the date we're counting down to
 			var countDownDate = new Date().getTime();
@@ -135,7 +135,7 @@
 					}
 			}
 
-		</script>
+		</script> -->
 		{% comment %}
 		<!-- <p id="demo"></p> --> {% endcomment %}
 		{% if question  %}
@@ -209,7 +209,7 @@
 					{{ answer }}
 				</li>
 				{% comment %}
-				<script>
+				<!-- <script>
 					function checkone1(f) {
 
 						if (f.elements[0].type == "radio") {
@@ -243,7 +243,7 @@
 						}
 					}
 
-				</script> {% endcomment %}
+				</script> {% endcomment %} -->
 
 				{% endfor %}
 
@@ -282,8 +282,8 @@
 
 			<input type="button" value={% trans "Clear Response" %} class="btn btn-large btn-block btn-warning"
 				onClick='uncheckAll(this.form)'>
-			<input type="button" value={% trans "Previous" %} class="btn btn-large btn-block btn-warning"
-				onClick='goBack()'>
+			<!-- <input type="button" value={% trans "Previous" %} class="btn btn-large btn-block btn-warning"
+				onClick='goBack()'> -->
 			<input type="submit" value={% trans "Next" %} class="btn btn-large btn-block btn-warning">
 			{% endif %}
 			{% comment %} <a href="#" class="previous">&laquo; Previous</a>

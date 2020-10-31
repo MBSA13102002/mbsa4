@@ -4,43 +4,49 @@
 {% block title %}{% trans "All Quizzes" %}{% endblock %}
 
 {% block content %}
-<h2>{% trans "List of quizzes" %}</h2>
-    {% if quiz_list %}
-		<table class="table table-bordered table-striped">
+{% comment %} <h2 class="text-center">{% trans "LIST OF QUIZZES" %}</h2> {% endcomment %}
+{% if quiz_list %}
 
-		  <thead>
-			<tr>
-			  <th>{% trans "Title" %}</th>
-			  <th>{% trans "Category" %}</th>
-			  <th>{% trans "Exam" %}</th>
-			  <th>{% trans "Single attempt" %}</th>
-			  <th></th>
-			</tr>
-		  </thead>
+{% for quiz in quiz_list %}
+<div class="card" style="width: 18rem;">
+	<img src="static/ora.jpg" class="card-img-top" alt="...">
+	<div class="card-body">
+		<h5 class="card-title">{{ quiz.title }}</h5>
+		<p class="card-text"> <strong>SUBJECT</strong>-{{ quiz.category }}</p>
+		<a href="{% url 'quiz_start_page' slug=quiz.url %}" class="btn btn-primary">ATTEMPT</a>
+	</div>
+</div>
+<!-- <div id="omsai" class="center">
+	<p class="ram"><strong>NAME OF THE QUIZ</strong>
+		<p /> {{ quiz.title }}
+		<br>
+	<p class="ram"><strong>CATEGORY</strong>
+		<p />{{ quiz.category }}
+		<br>
+	<p class="ram"><strong>DATE</strong>
+		<p />{% now "jS \o\f F" %}
+		<br>
+		{% comment %} {% trans "Exam" %}-{{ quiz.exam_paper }} {% endcomment %}
+		{% comment %} <br> {% endcomment %}
+	<p class="ram"><strong>SINGLE ATTEMPT</strong>
+	<p>{{ quiz.single_attempt }}
+		<br>
+		{% questions as questions %}
+	<p class="ram"><strong>NO.OF QUESTIONS</strong>
+	<p>{{ questions }}
+		<br>
+		<a id="y" href="{% url 'quiz_start_page' slug=quiz.url %}">
+			{% trans "View details" %}
+		</a>
+</div> -->
 
-		  <tbody>
-        
-        {% for quiz in quiz_list %}
-		   
-            <tr>
-			    <td>{{ quiz.title }}</td>
-			    <td>{{ quiz.category }}</td>
-			    <td>{{ quiz.exam_paper }}</td>
-			    <td>{{ quiz.single_attempt }}</td>
-			    <td>
-				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
-				       {% trans "View details" %} 
-				    </a>
-			    </td>
-			</tr>
 
-	
-        {% endfor %}
-		  </tbody>
+{% endfor %}
 
-		</table>
 
-	 {% else %}
-        <p>{% trans "There are no available quizzes" %} </p> 
-    {% endif %} 
+
+
+{% else %}
+<p>{% trans "There are no available quizzes" %} </p>
+{% endif %}
 {% endblock %}

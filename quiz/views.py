@@ -304,7 +304,7 @@ def login_user(request):
             user = User.objects.create_user(username=username,password=raw_password)                       
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            messages.success(request, 'You Are Welcome!@!')
+            # messages.success(request, 'You Are Welcome!@!')
         
             
 
