@@ -296,7 +296,7 @@ def login_user(request):
         try:   
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            messages.success(request, 'You Are Welcome!@!')
+            # messages.success(request, 'You Are Welcome!@!')
             
         except: 
            

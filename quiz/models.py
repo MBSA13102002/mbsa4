@@ -48,6 +48,9 @@ class Quiz(models.Model):
     title = models.CharField(
         verbose_name=_("Title"),
         max_length=60, blank=False)
+    subject = models.CharField(
+        verbose_name=_("Subject"),
+        max_length=60, blank=False)
 
     description = models.TextField(
         verbose_name=_("Description"),
@@ -62,8 +65,8 @@ class Quiz(models.Model):
         Category, null=True, blank=True,
         verbose_name=_("Category"), on_delete=models.CASCADE)
 # =====================================================================
-    timer = models.SmallIntegerField(default=60,blank=True, null=True, verbose_name=_("Timer"),
-        help_text=_("time to be alloted on a quiz"))
+    # timer = models.SmallIntegerField(default=60,blank=True, null=True, verbose_name=_("Timer"),
+    #     help_text=_("time to be alloted on a quiz"))
 # v=============================================================================================
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
     #         verbose_name=_("User"), on_delete=models.CASCADE)

@@ -9,11 +9,13 @@
 
 {% for quiz in quiz_list %}
 <div class="card" style="width: 18rem;">
-	<img src="static/ora.jpg" class="card-img-top" alt="...">
-	<div class="card-body">
-		<h5 class="card-title">{{ quiz.title }}</h5>
-		<p class="card-text"> <strong>SUBJECT</strong>-{{ quiz.category }}</p>
-		<a href="{% url 'quiz_start_page' slug=quiz.url %}" class="btn btn-primary">ATTEMPT</a>
+	{% comment %} <img src="static/PLASMA.png" class="card-img-top" alt="..."> {% endcomment %}
+	<div class="card-body mbsa">
+		<h5 class="card-title text-center">{{ quiz.title }}</h5>
+		<p class="card-text text-center"> <strong>SUBJECT</strong>-{{ quiz.subject }}</p>
+		{% questions as questions %}
+	    <p class="card-text text-center"><strong>NO.OF QUESTIONS</strong>-{{ questions }}</p>
+		<a href="{% url 'quiz_start_page' slug=quiz.url %}" class="btn btn-primary center mn">ATTEMPT</a>
 	</div>
 </div>
 <!-- <div id="omsai" class="center">
