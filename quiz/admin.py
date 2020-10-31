@@ -87,6 +87,6 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(MCQQuestion, MCQuestionAdmin)
 admin.site.register(Progress, ProgressAdmin)
 admin.site.register(CSVUpload, CSVUploadsAdmin)
-admin.site.site_header = "PLAZMA'S Admin"
-admin.site.site_title = "PLAZMA'S Admin Portal"
-admin.site.index_title = "PLAZMA'S - THE LEARNING CAFE"
+admin.site.site_header = "PLASMA'Z Admin"
+admin.site.site_title = "PLASMA'Z Admin Portal"
+admin.site.index_title = "PLASMA'Z - THE LEARNING CAFE"

@@ -5,11 +5,16 @@
 
 {% block content %}
 {% comment %} <h2 class="text-center">{% trans "LIST OF QUIZZES" %}</h2> {% endcomment %}
+<style>
+body{
+	background-color: white;
+}
+</style>
+<!-- <div class="container4"> -->
 {% if quiz_list %}
-
+<div class="container4">
 {% for quiz in quiz_list %}
-<div class="card" style="width: 18rem;">
-	{% comment %} <img src="static/PLASMA.png" class="card-img-top" alt="..."> {% endcomment %}
+<div class="card dg" style="width: 18rem;">
 	<div class="card-body mbsa">
 		<h5 class="card-title text-center">{{ quiz.title }}</h5>
 		<p class="card-text text-center"> <strong>SUBJECT</strong>-{{ quiz.subject }}</p>
@@ -44,11 +49,12 @@
 
 
 {% endfor %}
-
+</div>
 
 
 
 {% else %}
 <p>{% trans "There are no available quizzes" %} </p>
 {% endif %}
+<!-- </div> -->
 {% endblock %}
