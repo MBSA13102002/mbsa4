@@ -14,6 +14,8 @@ from .signals import csv_uploaded
 from .validators import csv_file_validator
 from django.contrib.auth.models import User
 from django.contrib import messages
+from countdowntimer_model.models import CountdownTimer
+
 
 
 class CategoryManager(models.Manager):
@@ -651,5 +653,13 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(csv_upload_post_save, sender=CSVUpload)
+
+class DoomsdayCountdownTimer(CountdownTimer):
+    #....
+    def timer():
+        doomsday_timer = DoomsdayCountdownTimer.object.create(
+            duration_in_minutes=123,
+            state=DoomsdayCountdownTimer.STATE.RUNNING,)
+            
 
 
